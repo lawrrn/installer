@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+apt-get -y update
+apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev npm
+adduser --disabled-password --gecos "" asyn
+adduser asyn sudo
+exit
