@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
-
 # vim ~/.bashrc
 # -------------------------------------------
 # export RBENV_ROOT="${HOME}/.rbenv"
@@ -12,6 +10,8 @@ curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-instal
 # fi
 # -------------------------------------------
 # source .bashrc
+
+curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
 sudo rbenv bootstrap-ubuntu-12-04
 rbenv install 2.1.3
