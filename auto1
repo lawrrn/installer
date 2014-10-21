@@ -24,7 +24,7 @@ ufw --force enable
 add-apt-repository -y ppa:nginx/stable
 echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
 apt-get -y update
-apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev npm fail2ban ntp monit nginx imagemagick newrelic-sysmond
+apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev nodejs fail2ban ntp monit nginx imagemagick newrelic-sysmond
 wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
 /etc/init.d/newrelic-sysmond start
