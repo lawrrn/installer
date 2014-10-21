@@ -5,7 +5,21 @@ mkdir /home/asyn/.ssh
 
 # SECURITY
 apt-get -y update
-apt-get -y install fail2ban && cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+apt-get -y install fail2ban ntp monit
+
+# NTP
+echo "America/Los_Angeles" > /etc/timezone
+dpkg-reconfigure -f noninteractive tzdata
+date
+
+# MONIT
+ps aux | grep monit
+service monit status
+# vim /etc/monit/monitrc
+service monit restart
+
+# FAIL2BAN
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 
 # REBOOT OUT OF MEMORY
 sed -i '$ a vm.panic_on_oom=1\nkernel.panic=10' /etc/sysctl.conf
@@ -15,14 +29,6 @@ sed -i '$ a vm.panic_on_oom=1\nkernel.panic=10' /etc/sysctl.conf
 sed -i '$ a tmpfs     /run/shm     tmpfs     defaults,noexec,nosuid     0     0' /etc/fstab
 # vim /etc/fstab
 
-# FAIL2BAN
-sed -i "/^\[ssh\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
-sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
-sed -i "/^\[ssh-ddos\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
-service fail2ban restart
-# vim /etc/fail2ban/jail.local
-exit
-# ---------------------------------------------------------------------------
 
 # curl https://raw.githubusercontent.com/lawrrn/installer/master/part1 | bash
 
