@@ -22,6 +22,7 @@ ufw allow 222/tcp
 ufw --force enable
 
 add-apt-repository -y ppa:nginx/stable
+add-apt-repository -y ppa:chris-lea/node.js
 echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
 apt-get -y update
 apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev nodejs fail2ban ntp monit nginx imagemagick newrelic-sysmond
