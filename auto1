@@ -24,22 +24,15 @@ ufw --force enable
 add-apt-repository -y ppa:nginx/stable
 add-apt-repository -y ppa:chris-lea/node.js
 echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
-apt-get -y update
-wait
+apt-get -y update &&
 wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
-wait
-apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev
-wait
+apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev &&
 apt-get -y install nodejs fail2ban ntp monit nginx imagemagick || echo "Installation failed..." && exit
-wait
-apt-get -qq --force-yes install newrelic-sysmond
-wait
-nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
-wait
-/etc/init.d/newrelic-sysmond start
+apt-get -y install newrelic-sysmond &&
+nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273 &&
+/etc/init.d/newrelic-sysmond start || echo "Installation newrelic-sysmond failed" && exit
 
 # service ssh restart
-
 # reboot
 
 
