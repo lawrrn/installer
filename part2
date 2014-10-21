@@ -27,7 +27,7 @@ sudo ufw status verbose
 
 # NEW RELIC
 sudo sh -c "echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list"
-sudo wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+sudo wget -O- https://download.newrelic.com/548C16BF.gpg | sudo apt-key add -
 sudo apt-get -y update
 sudo apt-get -y install newrelic-sysmond
 sudo nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
