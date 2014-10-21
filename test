@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 echo "Enter IP Address: "
-read hostip
+read -p hostip
 ssh root@$hostip
