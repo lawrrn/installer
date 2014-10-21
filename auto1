@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+adduser --disabled-password --gecos "" asyn
+sudo echo "asyn ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+mkdir -p /home/asyn/.ssh && cp /root/.ssh/authorized_keys /home/asyn/.ssh/authorized_keys && chmod 600 /home/asyn/.ssh/authorized_keys
+echo "America/Los_Angeles" > /etc/timezone
+dpkg-reconfigure -f noninteractive tzdata
+date
+sed -i '$ a vm.panic_on_oom=1\nkernel.panic=10' /etc/sysctl.conf
+sed -i '$ a tmpfs     /run/shm     tmpfs     defaults,noexec,nosuid     0     0' /etc/fstab
+echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
+sed -i "s/Port 22/Port 222/" /etc/ssh/sshd_config
+sed -i "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
+sed -i "s/IPV6=yes/IPV6=no/" /etc/default/ufw
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow www
+ufw allow https
+ufw allow 222/tcp
+ufw --force enable
+
+add-apt-repository -y ppa:nginx/stable
+apt-get -y update
+apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev npm fail2ban ntp monit nginx
+aptitude install -y imagemagick
+
+sh -c "echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list"
+wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+apt-get -y update
+apt-get -y install newrelic-sysmond
+nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
+/etc/init.d/newrelic-sysmond start
+
+# curl https://raw.githubusercontent.com/lawrrn/installer/master/auto1 | bash
