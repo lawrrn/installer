@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+sudo rbenv bootstrap-ubuntu-12-04
+rbenv install 2.1.2 --verbose
+rbenv global 2.1.2
+ruby -v
+
+echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
+
+gem install bundler --no-ri --no-rdoc
+gem install rake
+rbenv rehash
+bundle -v
