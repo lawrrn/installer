@@ -1,19 +1,39 @@
 #!/usr/bin/env bash
 
-# vim ~/.bashrc
-# -------------------------------------------
-# export RBENV_ROOT="${HOME}/.rbenv"
-#
-# if [ -d "${RBENV_ROOT}" ]; then
-#  export PATH="${RBENV_ROOT}/bin:${PATH}"
-#  eval "$(rbenv init -)"
-# fi
-# -------------------------------------------
-# source .bashrc
+# LOGIN
+sudo chown -R asyn:asyn .ssh
+sudo chmod 600 .ssh/authorized_keys
 
-curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+# FAIL2BAN
+sed -i "/^\[ssh\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
+sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
+sed -i "/^\[ssh-ddos\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
+service fail2ban restart
+# vim /etc/fail2ban/jail.local
 
-sudo rbenv bootstrap-ubuntu-12-04
-rbenv install 2.1.3
-rbenv global 2.1.3
-ruby -v
+# CHANGE PORTS
+sed -i "s/Port 22/Port 222/" /etc/ssh/sshd_config
+sed -i "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
+service ssh restart
+# vim /etc/ssh/sshd_config
+
+# FIREWALL
+sed -i "s/IPV6=yes/IPV6=no/" /etc/default/ufw
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow 222/tcp
+ufw enable
+ufw status verbose
+
+# NEW RELIC
+sudo su
+echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
+wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+apt-get update
+apt-get -y install newrelic-sysmond
+nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
+/etc/init.d/newrelic-sysmond start
+exit
+
+# curl https://raw.githubusercontent.com/lawrrn/installer/master/part2 | bash
+
