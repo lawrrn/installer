@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 adduser --disabled-password --gecos "" asyn
 sudo echo "asyn ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
-mkdir -p /home/asyn/.ssh && cp /root/.ssh/authorized_keys /home/asyn/.ssh/authorized_keys && chmod 600 /home/asyn/.ssh/authorized_keys
+mkdir -p /home/asyn/.ssh && cp /root/.ssh/authorized_keys /home/asyn/.ssh/authorized_keys
+chmod 600 /home/asyn/.ssh/authorized_keys && chown -R asyn:asyn /home/asyn/.ssh
 echo "America/Los_Angeles" > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
 date
