@@ -29,8 +29,8 @@ apt-get -y update && wget -O- https://download.newrelic.com/548C16BF.gpg | apt-k
 # MANUALLY:
 # apt-get -y --force-yes install newrelic-sysmond && nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273 && /etc/init.d/newrelic-sysmond start
 
-cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && sudo sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
-service fail2ban restart
-service ssh restart
+# cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && sudo sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
+# service fail2ban restart
+# service ssh restart
 
 # curl https://raw.githubusercontent.com/lawrrn/installer/master/auto1 | bash
