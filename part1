@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 adduser --disabled-password --gecos "" asyn
-sudo echo "asyn ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+echo "asyn ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 mkdir /home/asyn/.ssh
 
 # SECURITY
