@@ -1,41 +1,38 @@
 #!/usr/bin/env bash
 
-sudo su 
-
 # LOGIN
 sudo chown -R asyn:asyn .ssh
 sudo chmod 600 .ssh/authorized_keys
 
 # FAIL2BAN
-sed -i "/^\[ssh\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
-sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
-sed -i "/^\[ssh-ddos\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
-service fail2ban restart
+sudo sed -i "/^\[ssh\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
+sudo sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
+sudo sed -i "/^\[ssh-ddos\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
+sudo service fail2ban restart
 # vim /etc/fail2ban/jail.local
 
 # CHANGE PORTS
-sed -i "s/Port 22/Port 222/" /etc/ssh/sshd_config
-sed -i "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
-service ssh restart
+sudo sed -i "s/Port 22/Port 222/" /etc/ssh/sshd_config
+sudo sed -i "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
+sudo service ssh restart
 # vim /etc/ssh/sshd_config
 
 # FIREWALL
-sed -i "s/IPV6=yes/IPV6=no/" /etc/default/ufw
-ufw default deny incoming
-ufw default allow outgoing
-ufw allow 222/tcp
-ufw enable
-ufw status verbose
+sudo sed -i "s/IPV6=yes/IPV6=no/" /etc/default/ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 222/tcp
+sudo ufw enable
+sudo ufw status verbose
 
 # NEW RELIC
-sudo su
-echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
-wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
-apt-get update
-apt-get -y install newrelic-sysmond
-nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
-/etc/init.d/newrelic-sysmond start
-exit
+sudo sh -c "echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list"
+sudo wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+sudo apt-get -y update
+sudo apt-get -y install newrelic-sysmond
+sudo nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
+sudo /etc/init.d/newrelic-sysmond start
+
 
 # curl https://raw.githubusercontent.com/lawrrn/installer/master/part2 | bash
 
