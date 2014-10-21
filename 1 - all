@@ -2,9 +2,27 @@
 adduser --disabled-password --gecos "" asyn
 sudo echo "asyn ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 mkdir /home/asyn/.ssh
+
+# SECURITY
+apt-get -y update
+apt-get -y install fail2ban
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+sed -i "/^\[ssh\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
+sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
+sed -i "/^\[ssh-ddos\]$/,/^\[/s/port[[:blank:]]*=.*/port = 222/" /etc/fail2ban/jail.local
+service fail2ban restart
+# sudo vim /etc/fail2ban/jail.local
+
+# REBOOT OUT OF MEMORY
+sed -i '$ a vm.panic_on_oom=1\nkernel.panic=10' /etc/sysctl.conf
+# vim /etc/sysctl.conf
+
+# SHARED MEMORY READ ONLY
+sed -i '$ a tmpfs     /run/shm     tmpfs     defaults,noexec,nosuid     0     0' /etc/fstab
+# vim /etc/fstab
 exit
 
-
+# ---------------------------------------------------------------------------
 # curl https://raw.githubusercontent.com/lawrrn/installer/master/part1 | bash
 
 # scp .ssh/id_rsa.pub root@x.x.x.x:/home/asyn/.ssh/authorized_keys
