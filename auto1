@@ -8,7 +8,7 @@ dpkg-reconfigure -f noninteractive tzdata
 date
 sed -i '$ a vm.panic_on_oom=1\nkernel.panic=10' /etc/sysctl.conf
 sed -i '$ a tmpfs     /run/shm     tmpfs     defaults,noexec,nosuid     0     0' /etc/fstab
-echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
+echo 'gem: --no-document' >> ~/.gemrc
 sed -i "s/Port 22/Port 222/" /etc/ssh/sshd_config
 sed -i "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
 sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
