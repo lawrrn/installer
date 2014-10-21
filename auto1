@@ -27,7 +27,7 @@ echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.l
 apt-get -y update && wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add - && apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev nodejs fail2ban ntp monit nginx imagemagick 
 
 # MANUALLY:
-# apt-get -y install newrelic-sysmond && nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273 && /etc/init.d/newrelic-sysmond start
+# apt-get -y --force-yes install newrelic-sysmond && nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273 && /etc/init.d/newrelic-sysmond start
 
 
 
