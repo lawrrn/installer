@@ -30,4 +30,6 @@ apt-get -y install newrelic-sysmond
 nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
 /etc/init.d/newrelic-sysmond start
 
+reboot
+
 # curl https://raw.githubusercontent.com/lawrrn/installer/master/auto1 | bash
