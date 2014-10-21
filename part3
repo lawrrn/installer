@@ -45,3 +45,5 @@ bundle -v
 # IMAGE PROCESSING
 sudo aptitude install -y imagemagick
 
+
+# curl https://raw.githubusercontent.com/lawrrn/installer/master/part3 | bash
