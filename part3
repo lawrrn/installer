@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # FIREWALL
-ufw allow www
-ufw allow https
+sudo ufw allow www
+sudo ufw allow https
 sudo ufw disable
 sudo ufw --force enable
 
@@ -18,7 +18,7 @@ sudo ufw --force enable
 # source .bashrc
 
 
-# UPDATE
+# RUN STUFF
 sudo apt-get -y update
 sudo apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev npm
 
@@ -47,3 +47,4 @@ sudo aptitude install -y imagemagick
 
 
 # curl https://raw.githubusercontent.com/lawrrn/installer/master/part3 | bash
+
