@@ -11,6 +11,8 @@ sed -i '$ a tmpfs     /run/shm     tmpfs     defaults,noexec,nosuid     0     0'
 echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
 sed -i "s/Port 22/Port 222/" /etc/ssh/sshd_config
 sed -i "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
+sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+sed -i "s/UsePAM yes/UsePAM no/" /etc/ssh/sshd_config
 sed -i "s/IPV6=yes/IPV6=no/" /etc/default/ufw
 ufw default deny incoming
 ufw default allow outgoing
