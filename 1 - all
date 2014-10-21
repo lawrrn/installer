@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+adduser --disabled-password --gecos "" asyn
+sudo echo "asyn ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+mkdir /home/asyn/.ssh
+exit
+
+# curl https://raw.githubusercontent.com/lawrrn/installer/master/part1 | bash
+# scp .ssh/id_rsa.pub root@x.x.x.x:/home/asyn/.ssh/authorized_keys
