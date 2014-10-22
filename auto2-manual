@@ -24,3 +24,6 @@ gem install rails --no-ri --no-rdoc
 gem install bundler --no-ri --no-rdoc
 rbenv rehash
 bundle -v
+
+sudo apt-get -y install libpq-dev
+gem install pg
