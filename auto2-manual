@@ -25,6 +25,11 @@ gem install bundler --no-ri --no-rdoc
 rbenv rehash
 bundle -v
 
+# REQUIRED: capistrano
+sudo apt-get -y install libpq-dev
+gem install pg
+# REQUIRED: capistrano
+
 
 #add swap memory for passenger
 sudo dd if=/dev/zero of=/swap bs=1M count=1024
