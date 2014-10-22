@@ -1,8 +1,5 @@
 # DB
 
-sudo apt-get -y install libpq-dev
-gem install pg
-
 sudo su
 
 ufw delete allow www
