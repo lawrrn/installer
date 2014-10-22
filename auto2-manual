@@ -25,5 +25,40 @@ gem install bundler --no-ri --no-rdoc
 rbenv rehash
 bundle -v
 
-sudo apt-get -y install libpq-dev
-gem install pg
+
+#add swap memory for passenger
+sudo dd if=/dev/zero of=/swap bs=1M count=1024
+sudo mkswap /swap
+sudo swapon /swap
+
+# download nginx 
+wget http://nginx.org/download/nginx-1.7.6.tar.gz
+tar -xzvf nginx-1.7.6.tar.gz
+
+# download clear headers
+wget https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz
+tar -xzvf v0.25.tar.gz 
+
+# install nginx + passenger
+sudo apt-get -y install libcurl4-openssl-dev
+gem install passenger
+rbenv rehash
+sudo /home/asyn/.rbenv/shims/passenger-install-nginx-module
+PATH: /home/asyn/nginx-1.7.6
+EXTRA: --add-module=/home/asyn/headers-more-nginx-module-0.25
+
+NGINX-CONF location: /opt/nginx/conf/nginx.conf
+
+# nginx clear headers
+more_set_headers "Server: stuppy";
+more_set_headers "X-Powered-By: stuppy";
+more_clear_headers 'X-Runtime';
+
+# setup service nginx
+# wget -O init-deb.sh http://library.linode.com/assets/660-init-deb.sh
+# sudo mv init-deb.sh /etc/init.d/nginx 
+# sudo chmod +x /etc/init.d/nginx
+
+// doesnt work
+# sudo /usr/sbin/update-rc.d -f nginx default
+passenger-memory-stats
