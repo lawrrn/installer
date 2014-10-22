@@ -13,16 +13,6 @@ service ufw restart
 apt-get -y update
 apt-get -y install postgresql postgresql-contrib
 
-sudo -i -u postgres
-psql
-
-CREATE USER username WITH PASSWORD 'password' CREATEDB;
-ALTER USER username WITH SUPERUSER;
-
-CREATE DATABASE database_development;
-GRANT ALL PRIVILEGES ON DATABASE database_development TO username;
-
-
 sudo vim /etc/postgresql/9.3/main/pg_hba.conf
 ADD: host all all all md5
 
@@ -30,3 +20,15 @@ sudo vim /etc/postgresql/9.3/main/postgresql.conf
 ADD: listen_addresses='*'
 
 sudo service postgresql restart
+
+sudo -i -u postgres
+psql
+
+CREATE USER _ WITH PASSWORD '_' CREATEDB;
+ALTER USER _ WITH SUPERUSER;
+
+CREATE DATABASE _development;
+GRANT ALL PRIVILEGES ON DATABASE _development TO _;
+
+CREATE DATABASE _production;
+GRANT ALL PRIVILEGES ON DATABASE _production TO _;
