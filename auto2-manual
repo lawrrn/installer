@@ -25,8 +25,8 @@ gem install bundler --no-ri --no-rdoc
 rbenv rehash
 bundle -v
 
-gem install backup
-gem install whenever
+gem install backup --no-ri --no-rdoc
+gem install whenever --no-ri --no-rdoc
 
 
 # REQUIRED: capistrano
