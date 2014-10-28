@@ -25,6 +25,10 @@ gem install bundler --no-ri --no-rdoc
 rbenv rehash
 bundle -v
 
+gem install backup
+gem install whenever
+
+
 # REQUIRED: capistrano
 sudo apt-get -y install libpq-dev
 gem install pg
