@@ -71,3 +71,6 @@ more_clear_headers 'X-Runtime';
 // doesnt work
 # sudo /usr/sbin/update-rc.d -f nginx default
 passenger-memory-stats
+
+# install memcached
+sudo apt-get -y install memcached
