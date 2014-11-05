@@ -29,7 +29,7 @@ gem install backup whenever --no-ri --no-rdoc
 
 # REQUIRED: capistrano
 sudo apt-get -y install libpq-dev
-gem install pg
+gem install pg --no-ri --no-rdoc
 # REQUIRED: capistrano
 
 
@@ -48,7 +48,7 @@ tar -xzvf v0.25.tar.gz
 
 # install nginx + passenger
 sudo apt-get -y install libcurl4-openssl-dev
-gem install passenger
+gem install passenger --no-ri --no-rdoc
 rbenv rehash
 sudo /home/asyn/.rbenv/shims/passenger-install-nginx-module
 PATH: /home/asyn/nginx-1.7.6
