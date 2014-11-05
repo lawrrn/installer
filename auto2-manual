@@ -24,9 +24,6 @@ gem install rails bundler --no-ri --no-rdoc
 rbenv rehash
 bundle -v
 
-gem install backup whenever --no-ri --no-rdoc
-
-
 # REQUIRED: capistrano
 sudo apt-get -y install libpq-dev
 gem install pg --no-ri --no-rdoc
@@ -69,3 +66,5 @@ more_clear_headers 'X-Runtime';
 // doesnt work
 # sudo /usr/sbin/update-rc.d -f nginx default
 passenger-memory-stats
+
+gem install backup whenever --no-ri --no-rdoc
