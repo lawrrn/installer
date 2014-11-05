@@ -46,8 +46,8 @@ tar -xzvf nginx-1.7.6.tar.gz
 wget https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz
 tar -xzvf v0.25.tar.gz 
 
-# install nginx + passenger
-sudo apt-get -y install libcurl4-openssl-dev
+# install nginx + passenger + memcached
+sudo apt-get -y install libcurl4-openssl-dev memcached
 gem install passenger --no-ri --no-rdoc
 rbenv rehash
 sudo /home/asyn/.rbenv/shims/passenger-install-nginx-module
@@ -69,6 +69,3 @@ more_clear_headers 'X-Runtime';
 // doesnt work
 # sudo /usr/sbin/update-rc.d -f nginx default
 passenger-memory-stats
-
-# install memcached
-sudo apt-get -y install memcached
