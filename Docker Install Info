@@ -1,0 +1,23 @@
+FROM lawrrn/ruby-rails
+
+MAINTAINER lawrrn
+
+RUN add-apt-repository -y ppa:chris-lea/node.js
+RUN apt-get update
+RUN apt-get -y install wget libcurl4-openssl-dev nodejs imagemagick
+
+RUN wget http://nginx.org/download/nginx-1.7.6.tar.gz
+RUN tar -xzvf nginx-1.7.6.tar.gz
+
+RUN wget https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz
+RUN tar -xzvf v0.25.tar.gz 
+
+RUN wget https://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.34.tar.gz
+RUN tar -xzvf pcre-8.34.tar.gz
+
+RUN gem install passenger --no-ri --no-rdoc
+RUN rbenv rehash
+
+RUN /usr/local/rbenv/shims/passenger-install-nginx-module --auto --prefix=/etc/nginx --nginx-source-dir=/nginx-1.7.6 --extra-configure-flags="--with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module --with-cc-opt='-Wno-error' --with-pcre='/pcre-8.34' --add-module='/usr/local/rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/passenger-4.0.53/ext/nginx' --add-module=/headers-more-nginx-module-0.25"
+
+
