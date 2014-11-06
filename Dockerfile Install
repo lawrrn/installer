@@ -1,0 +1,28 @@
+Docker Install Manually - Part 2
+
+# nginx, passenger
+# VOLUME ["/home/www"]
+
+add-apt-repository -y ppa:chris-lea/node.js
+apt-get update
+apt-get -y install wget libcurl4-openssl-dev nodejs imagemagick
+
+# download nginx 
+wget http://nginx.org/download/nginx-1.7.6.tar.gz
+tar -xzvf nginx-1.7.6.tar.gz
+
+# download clear headers
+wget https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz
+tar -xzvf v0.25.tar.gz 
+
+# install passenger for rails access
+gem install passenger --no-ri --no-rdoc
+rbenv rehash
+
+# compile nginx + passenger
+/usr/local/rbenv/shims/passenger-install-nginx-module
+
+PATH: /nginx-1.7.6
+EXTRA: --add-module=/headers-more-nginx-module-0.25
+
+
