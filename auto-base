@@ -28,8 +28,8 @@ apt-get -y fail2ban ntp monit
 # cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local && sudo sed -i "/^\[ssh-ddos\]$/,/^\[/s/enabled[[:blank:]]*=.*/enabled = true/" /etc/fail2ban/jail.local
 # service fail2ban restart
 # service ssh restart
-# -------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 #
-# curl https://raw.githubusercontent.com/lawrrn/installer/master/auto-base | bash
+#     curl https://raw.githubusercontent.com/lawrrn/installer/master/auto-base | bash
 #
 #
