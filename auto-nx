@@ -4,9 +4,7 @@ sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get -y update
 sudo apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev nodejs imagemagick libpq-dev memcached
 
-sudo ufw allow www
-sudo ufw allow https
-sudo service ufw restart
+sudo ufw allow www && sudo ufw allow https && sudo service ufw restart
 
 curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
