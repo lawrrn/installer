@@ -18,7 +18,7 @@ ufw allow ssh
 ufw --force enable
 echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
 apt-get -y update && wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
-apt-get -y fail2ban ntp monit
+apt-get -y install fail2ban ntp monit
 
 
 # apt-get -y newrelic-sysmond 
