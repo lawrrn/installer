@@ -23,7 +23,7 @@ fi
 source .bashrc
 
 rbenv bootstrap-ubuntu-12-04
-rbenv install 2.1.5 # --verbose
+rbenv install 2.1.5   # --verbose
 rbenv global 2.1.5
 ruby -v
 
