@@ -20,7 +20,7 @@ echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.l
 apt-get -y update && apt-get -y install fail2ban ntp monit
 
 #   wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
-#   apt-get -y newrelic-sysmond 
+#   apt-get -y --force-yes install newrelic-sysmond
 #   nrsysmond-config --set license_key=39d84434c7725f2754cf12b0e5f5777215176273
 #   /etc/init.d/newrelic-sysmond start
 
