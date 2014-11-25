@@ -1,9 +1,8 @@
 # !ROOT RECONNECT...
 # ------------------------------------------
-add-apt-repository -y ppa:chris-lea/node.js
-apt-get -y update
-
-apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev nodejs imagemagick libpq-dev memcached
+sudo add-apt-repository -y ppa:chris-lea/node.js
+sudo apt-get -y update
+sudo apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev nodejs imagemagick libpq-dev memcached
 
 sudo ufw allow www
 sudo ufw allow https
@@ -37,7 +36,6 @@ bundle -v
 # REQUIRED capistrano: libpq-dev
 gem install pg --no-ri --no-rdoc
 
-
 # download nginx 
 wget http://nginx.org/download/nginx-1.7.7.tar.gz
 tar -xzvf nginx-1.7.7.tar.gz
@@ -46,7 +44,7 @@ tar -xzvf nginx-1.7.7.tar.gz
 wget https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz
 tar -xzvf v0.25.tar.gz 
 
-# install nginx + passenger # sudo apt-get -y install libcurl4-openssl-dev
+# install nginx/passenger # sudo apt-get -y install libcurl4-openssl-dev
 gem install passenger --pre -v 5.0.0.beta1 --no-ri --no-rdoc
 rbenv rehash
 sudo /home/asyn/.rbenv/shims/passenger-install-nginx-module
@@ -60,14 +58,11 @@ sudo chmod +x /etc/init.d/nginx
 
 passenger-memory-stats
 
-
-
-# BACKUP
-# -------------------------------------------
+# BACKUP ------------------------------------
 gem install backup whenever --no-ri --no-rdoc
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-lsb_release -c
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ CODENAME-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+lsb_release -c 
+# sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ CODENAME-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
 sudo apt-get update
 sudo apt-get install postgresql-client-9.3
