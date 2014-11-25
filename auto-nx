@@ -1,0 +1,81 @@
+# !ROOT RECONNECT...
+# ------------------------------------------
+add-apt-repository -y ppa:chris-lea/node.js
+apt-get -y update
+
+apt-get -y install curl git-core python-software-properties build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev libcurl4-openssl-dev nodejs imagemagick libpq-dev memcached
+
+sudo ufw allow www
+sudo ufw allow https
+sudo service ufw restart
+
+curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+
+-------------------------------------------------------------------------------------------
+
+
+vim ~/.bashrc
+
+export RBENV_ROOT="${HOME}/.rbenv"
+
+if [ -d "${RBENV_ROOT}" ]; then
+ export PATH="${RBENV_ROOT}/bin:${PATH}"
+ eval "$(rbenv init -)"
+fi
+
+source .bashrc
+
+rbenv bootstrap-ubuntu-12-04
+rbenv install 2.1.5 # --verbose
+rbenv global 2.1.5
+ruby -v
+
+gem install rails bundler --no-ri --no-rdoc
+rbenv rehash
+bundle -v
+
+# REQUIRED capistrano: libpq-dev
+gem install pg --no-ri --no-rdoc
+
+
+# download nginx 
+wget http://nginx.org/download/nginx-1.7.7.tar.gz
+tar -xzvf nginx-1.7.7.tar.gz
+
+# download clear headers
+wget https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz
+tar -xzvf v0.25.tar.gz 
+
+# install nginx + passenger # sudo apt-get -y install libcurl4-openssl-dev
+gem install passenger --pre -v 5.0.0.beta1 --no-ri --no-rdoc
+rbenv rehash
+sudo /home/asyn/.rbenv/shims/passenger-install-nginx-module
+PATH:  /home/asyn/nginx-1.7.7
+EXTRA:  --with-http_spdy_module --add-module=/home/asyn/headers-more-nginx-module-0.25
+
+# setup service nginx
+wget -O init-deb.sh http://library.linode.com/assets/660-init-deb.sh
+sudo mv init-deb.sh /etc/init.d/nginx 
+sudo chmod +x /etc/init.d/nginx
+
+passenger-memory-stats
+
+
+
+# BACKUP
+# -------------------------------------------
+gem install backup whenever --no-ri --no-rdoc
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+lsb_release -c
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ CODENAME-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+sudo apt-get update
+sudo apt-get install postgresql-client-9.3
+# REF: http://technobytz.com/install-postgresql-9-3-ubuntu.html
+
+
+# NOTES -----------------------------------------
+#add swap memory for passenger:
+# sudo dd if=/dev/zero of=/swap bs=1M count=1024
+# sudo mkswap /swap
+# sudo swapon /swap
