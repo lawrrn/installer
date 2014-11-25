@@ -53,6 +53,8 @@ wget -O init-deb.sh http://library.linode.com/assets/660-init-deb.sh
 sudo mv init-deb.sh /etc/init.d/nginx 
 sudo chmod +x /etc/init.d/nginx
 
+# copy SSL
+
 passenger-memory-stats
 
 # BACKUP ------------------------------------
