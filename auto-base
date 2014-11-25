@@ -29,4 +29,7 @@ apt-get -y fail2ban ntp monit
 # service fail2ban restart
 # service ssh restart
 # -------------------------------------------------------------------------------
+#
 # curl https://raw.githubusercontent.com/lawrrn/installer/master/auto-base | bash
+#
+#
