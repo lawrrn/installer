@@ -29,12 +29,11 @@ rbenv install 2.1.5 # --verbose
 rbenv global 2.1.5
 ruby -v
 
-gem install rails bundler --no-ri --no-rdoc
+gem install rails bundler pg --no-ri --no-rdoc
 rbenv rehash
 bundle -v
 
-# REQUIRED capistrano: libpq-dev
-gem install pg --no-ri --no-rdoc
+# REQUIRED capistrano: libpq-dev # gem install pg --no-ri --no-rdoc
 
 # download nginx 
 wget http://nginx.org/download/nginx-1.7.7.tar.gz
