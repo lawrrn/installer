@@ -29,7 +29,7 @@ ruby -v
 
 gem install rails bundler pg --no-ri --no-rdoc
 rbenv rehash
-bundle -v
+rails -v && bundle -v
 
 # REQUIRED capistrano: libpq-dev # gem install pg --no-ri --no-rdoc
 
